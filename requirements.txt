@@ -1,0 +1,7 @@
+pandas==1.4.4
+pyautogui==0.9.53
+streamlit==1.21.0
+streamlit-aggrid==0.3.4.post3
+openpyxl
+babel
+plotly
