@@ -179,9 +179,12 @@ with col3:
     option3 = st.selectbox(
         "LIVREUR",
         (
-           'ZOUBRI AMINE',
             'BELOUDINA RACHID',
             'OUAHIB ABDERRAHMANE',
+		'KAHLICHE ZINE EDDIN',
+		'BELHAMRI KADOUR ZAK',
+		'BELLALA MOHAMED',
+		'BREBRE RIAD',
             'LAOUANA FOUAD',
             'SAID HADJAZ',
             'LAOUAR ZAKARIA',
@@ -191,7 +194,6 @@ with col3:
             'ABDELLOUCHE NAZIM',
             'LEKBEDJ ABBES',
             'ARABI ABDELLAH',
-            'EL KADI ABDELMADJID MADJED',
             'TOUHAMI MOHAMED',
             'REZZOUG IMAD',
             'ESSEGHIR HOCINE',
