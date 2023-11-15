@@ -203,7 +203,9 @@ with col3:
             'ACILA ABDELLAH',
             'BENNOUI HACHEM',
             'BENBOUZID AYMEN ',
-	),
+	 'OUSSAMA DEBOUCI',
+	 'laimeche imade eddine',
+	 'AIT MEKIDECHE MOHAMED',),
         key="v3",
         
     )
