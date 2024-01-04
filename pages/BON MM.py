@@ -76,11 +76,11 @@ def grat(file,option1,option2,option3,d):
                 if y=='BON DE PREPARATION' or y=='Item Name':
                     print ('non')
                 elif y != nam[-1]:
-                    form=form+"'"+y+"'"+"!D"+str(t+49)+"+"
+                    form=form+"'"+y+"'"+"!D"+str(t+50)+"+"
                 else:
                     form=form+"'"+y+"'"+"!D"+str(t+49)
                 
-            sheet1['D'+str(t+49)]=Translator(form, origin='D'+str(t+49)).translate_formula('D'+str(t+49))
+            sheet1['D'+str(t+49)]=Translator(form, origin='D'+str(t+50)).translate_formula('D'+str(t+49))
         book.save(option1+'.xlsx') 
 
 
