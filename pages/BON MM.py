@@ -78,9 +78,9 @@ def grat(file,option1,option2,option3,d):
                 elif y != nam[-1]:
                     form=form+"'"+y+"'"+"!D"+str(t+50)+"+"
                 else:
-                    form=form+"'"+y+"'"+"!D"+str(t+49)
+                    form=form+"'"+y+"'"+"!D"+str(t+50)
                 
-            sheet1['D'+str(t+50)]=Translator(form, origin='D'+str(t+50)).translate_formula('D'+str(t+49))
+            sheet1['D'+str(t+50)]=Translator(form, origin='D'+str(t+50)).translate_formula('D'+str(t+50))
         book.save(option1+'.xlsx') 
 
 
