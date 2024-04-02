@@ -64,7 +64,7 @@ def grat(file,option1,option2,option3,d):
                 for t in range(len(o['Item ID'])):
                     print(o['Item ID'])
 
-                    sheet1['D'+str(t+50)].value=o[i][t]
+                    sheet1['D'+str(t+52)].value=o[i][t]
 
                 #print(o[i][t])
         nam=book.sheetnames
