@@ -76,11 +76,11 @@ def grat(file,option1,option2,option3,d):
                 if y=='BON DE PREPARATION' or y=='Item Name':
                     print ('non')
                 elif y != nam[-1]:
-                    form=form+"'"+y+"'"+"!D"+str(t+50)+"+"
+                    form=form+"'"+y+"'"+"!D"+str(t+52)+"+"
                 else:
-                    form=form+"'"+y+"'"+"!D"+str(t+50)
+                    form=form+"'"+y+"'"+"!D"+str(t+52)
                 
-            sheet1['D'+str(t+50)]=Translator(form, origin='D'+str(t+50)).translate_formula('D'+str(t+50))
+            sheet1['D'+str(t+50)]=Translator(form, origin='D'+str(t+50)).translate_formula('D'+str(t+52))
         book.save(option1+'.xlsx') 
 
 
@@ -280,7 +280,6 @@ with col2:
             	'MOHAMEDI MOKHTAR',
             	'BEN TEFRAOUINE FAHIM',
             	'LEKBEDJ ABBES',
-            	'ARABI ABDELLAH',
             	'Chouaki Mounir',
            	 'REZZOUG IMAD',
             	'DERAGI NOH',
@@ -289,6 +288,10 @@ with col2:
             	'BENBOUZID AYMEN ',
 	 	'laimeche imade eddine',
 	 	'Ait Igrine El Hocine',
+	 	'ARRACHE HICHEM',
+	 	'SALHI FOUZI',
+	 	'BENKINA AHMED',
+	 	'ADMANE IMAD',
 
         ),
         key="v2",
@@ -311,7 +314,6 @@ with col3:
             	'MOHAMEDI MOKHTAR',
             	'BEN TEFRAOUINE FAHIM',
             	'LEKBEDJ ABBES',
-            	'ARABI ABDELLAH',
             	'Chouaki Mounir',
            	 'REZZOUG IMAD',
             	'DERAGI NOH',
@@ -344,6 +346,10 @@ with col3:
 	 'BENBOUZID AYMEN ',
 	 'REZZOUG IMAD',
 	 'MOHAMEDI MOKHTAR',
+	'ARRACHE HICHEM',
+	 'SALHI FOUZI',
+	 'BENKINA AHMED',
+	 'ADMANE IMAD',
 	 
 
 
