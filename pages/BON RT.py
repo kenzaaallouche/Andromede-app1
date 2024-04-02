@@ -189,7 +189,6 @@ with col2:
             	'MOHAMEDI MOKHTAR',
             	'BEN TEFRAOUINE FAHIM',
             	'LEKBEDJ ABBES',
-            	'ARABI ABDELLAH',
             	'Chouaki Mounir',
            	 'REZZOUG IMAD',
             	'DERAGI NOH',
@@ -198,7 +197,10 @@ with col2:
             	'BENBOUZID AYMEN ',
 	 	'laimeche imade eddine',
 	 	'Ait Igrine El Hocine',
-
+	 	'ARRACHE HICHEM',
+	 	'SALHI FOUZI',
+	 	'BENKINA AHMED',
+	 	'ADMANE IMAD',
         ),
         key="v2",
         
@@ -219,7 +221,6 @@ with col3:
             	'MOHAMEDI MOKHTAR',
             	'BEN TEFRAOUINE FAHIM',
             	'LEKBEDJ ABBES',
-            	'ARABI ABDELLAH',
             	'Chouaki Mounir',
            	 'REZZOUG IMAD',
             	'DERAGI NOH',
@@ -251,7 +252,11 @@ with col3:
         "TOUADI  MOURAD",
 	 'BENBOUZID AYMEN ',
 	 'REZZOUG IMAD',
-	 'MOHAMEDI MOKHTAR',),
+	 'MOHAMEDI MOKHTAR',
+	'ARRACHE HICHEM',
+	 'SALHI FOUZI',
+	 'BENKINA AHMED',
+	 'ADMANE IMAD',),
         key="v3",
         
     )
