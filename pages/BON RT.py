@@ -4,8 +4,7 @@ import datetime
 import numpy as np
 from PIL import Image
 import pandas as pd
-from st_aggrid import AgGrid, GridOptionsBuilder
-from st_aggrid.shared import GridUpdateMode
+from datetime import  timedelta
 from babel.dates import format_date, format_datetime, format_time
 import openpyxl
 from openpyxl import workbook,load_workbook
@@ -22,6 +21,8 @@ def load_data(file,option1,option2,option3,d):
     sheet=book.active
     sheet1=book1.active
     sheet1.delete_rows(1,3)
+    U=len(sheet1['F'])
+    K=sheet1['F'+str(U-2)].value
     sheet1.delete_cols(6,4)
     mediumStyle = openpyxl.worksheet.table.TableStyleInfo(name='TableStyleLight1',
                                                       showRowStripes=True)
@@ -51,6 +52,8 @@ def load_data(file,option1,option2,option3,d):
         sheet1.row_dimensions[i].height = 15
     a=len(sheet1['E'])
     b=len(sheet['A'])
+    sheet1['A'+str(a+1)].value='tttttt'
+    print(a)
     thin_border = Border(left=Side(style='medium'), 
                      right=Side(style='medium'), 
                      top=Side(style='medium'), 
@@ -87,10 +90,12 @@ def load_data(file,option1,option2,option3,d):
     sheet1.merge_cells('C'+str(a+7)+':E'+str(a+7))
     sheet1.merge_cells('C'+str(a+8)+':E'+str(a+8))
     sheet1.merge_cells('C'+str(a+9)+':E'+str(a+9))
-    x = datetime.datetime.now()
+    x = datetime.datetime.now()+ timedelta(hours=1)
     sheet1['C'+str(a+9)]=x.strftime("%H:%M:%S")
+    sheet1['E'+str(a-2)].value=K
+    sheet1['E'+str(a-3)].value=K
     sheet1['B1'].value=str(option2)
-    
+    sheet1.delete_rows(a-1,2)
     book1.save(option1+'.xlsx')
     #book1.save(r""+t+"\\"+option1+'.xlsx')
 
