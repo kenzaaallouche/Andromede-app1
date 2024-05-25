@@ -18,12 +18,18 @@ import os
 @st.cache_data()
 def grat(file,option1,option2,option3,d):
     df =  pd.read_excel (file)
-    df=df.drop(['Salesman No','Region', 'City','Area','District ID', 'District Name', 'Salesman Name', 'Customer No','BUID', 'Points','Price', 'Value', 'Net','Invoice ID','Date','Time',], axis=1)
-    df = df.loc[df["Discount"] != 0]
+    df.columns= ['RegionNo', 'DistrictNo', 'DistrictNameE',
+       'CityNo', 'AreaNo', 'SalesmanNo', 'SalesmanNameE', 'SalesmanWarehouse',
+       'CustomerNo', 'CustomerNameE', 'InvoiceID', 'Date', 'ItemID',
+       'ItemNameE', 'Qty', 'UOM', 'UnitPrice', 'FreeItem', 'PromotionDiscount',
+       'LineValue', 'BUID','vide']
+    df = df.drop(columns=['vide'])
+    df=df.drop(['SalesmanNo','RegionNo', 'CityNo','AreaNo','DistrictNo', 'DistrictNameE', 'SalesmanNameE', 'CustomerNo','BUID', 'SalesmanWarehouse','UOM','UnitPrice', 'FreeItem','InvoiceID','Date',], axis=1)
+    df = df.loc[df["PromotionDiscount"] != 0]
     
-    dfg=df.groupby(['Customer Name','Item ID','Item Name'], as_index=False).sum()
-    p=pd.pivot_table(dfg,index=["Item ID","Item Name"], 
-                     columns=['Customer Name'], 
+    dfg=df.groupby(['CustomerNameE','ItemID','ItemNameE'], as_index=False).sum()
+    p=pd.pivot_table(dfg,index=["ItemID","ItemNameE"], 
+                     columns=['CustomerNameE'], 
                      values=['Qty'], aggfunc=np.sum)
     o=p.stack(dropna=True)
     o=o.unstack(level=2)
@@ -33,7 +39,7 @@ def grat(file,option1,option2,option3,d):
         sheet=book.active
         sheet.delete_rows(1,1)
         sheet.delete_rows(2,1)
-        sheet['A1'].value='Item ID'
+        sheet['A1'].value='ItemID'
         book.save("e.xlsx")
         o=pd.read_excel ('e.xlsx')
         o=o.fillna(0)
@@ -53,7 +59,7 @@ def grat(file,option1,option2,option3,d):
         #del myList[len(myList)-1]
     
         t=pd.read_excel ('pro.xlsx')
-        o=t.merge(o, how='left', on='Item ID')
+        o=t.merge(o, how='left', on='ItemID')
         o=o.fillna(0)
         book=load_workbook(option1+'.xlsx')
         for i in myList:
@@ -61,19 +67,19 @@ def grat(file,option1,option2,option3,d):
             if i in book.sheetnames:
                 book.active= book[i]
                 sheet1=book.active
-                for t in range(len(o['Item ID'])):
-                    print(o['Item ID'])
+                for t in range(len(o['ItemID'])):
+                    print(o['ItemID'])
 
                     sheet1['D'+str(t+53)].value=o[i][t]
 
                 #print(o[i][t])
         nam=book.sheetnames
-        for t in range(len(o['Item ID'])):
+        for t in range(len(o['ItemID'])):
             book.active= book['BON DE PREPARATION']
             sheet1=book.active
             form='=+'
             for y in nam:
-                if y=='BON DE PREPARATION' or y=='Item Name':
+                if y=='BON DE PREPARATION' or y=='ItemNameE':
                     print ('non')
                 elif y != nam[-1]:
                     form=form+"'"+y+"'"+"!D"+str(t+53)+"+"
@@ -87,21 +93,28 @@ def grat(file,option1,option2,option3,d):
 @st.cache_data()
 def load_data(file,option1,option2,option3,d):
     df1 =  pd.read_excel (file)
-    maxc=len(df1[~df1.duplicated('Customer Name')]['Customer Name'])
-    p=pd.pivot_table(df1, index=["Item ID","Item Name"], columns=['Customer Name'], values=['Net'], aggfunc=np.sum)
+    df1.columns= ['RegionNo', 'DistrictNo', 'DistrictNameE',
+       'CityNo', 'AreaNo', 'SalesmanNo', 'SalesmanNameE', 'SalesmanWarehouse',
+       'CustomerNo', 'CustomerNameE', 'InvoiceID', 'Date', 'ItemID',
+       'ItemNameE', 'Qty', 'UOM', 'UnitPrice', 'FreeItem', 'PromotionDiscount',
+       'LineValue', 'BUID','vide']
+    df1 = df1.drop(columns=['vide'])
+    df1=df1[df1['FreeItem'].isin(['Sold'])]
+    maxc=len(df1[~df1.duplicated('CustomerNameE')]['CustomerNameE'])
+    p=pd.pivot_table(df1, index=["ItemID","ItemNameE"], columns=['CustomerNameE'], values=['LineValue'], aggfunc=np.sum)
     p.to_excel('FG.xlsx')
     df =  pd.read_excel('FG.xlsx')
     m=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN']
     print(maxc)
     book1=load_workbook('FG.xlsx')
     sheet1=book1.active
-    sheet1.unmerge_cells('C1:'+m[maxc]+str('1'))
+    sheet1.unmerge_cells('C1:'+m[maxc+1]+str('1'))
     for i, row in enumerate(sheet1):
         sheet2=row
     sheet1.delete_rows(1,1)
     sheet1.delete_rows(2,1)
-    sheet1['A1'].value="Item ID"
-    sheet1['B1'].value="Item Name"
+    sheet1['A1'].value="ItemID"
+    sheet1['B1'].value="ItemNameE"
     #sheet1.delete_rows(2,1)
     book1.save("book.xlsx")
     df =  pd.read_excel("book.xlsx")
@@ -137,7 +150,7 @@ def load_data(file,option1,option2,option3,d):
     else:
         df2 =  pd.read_excel ("PRIXPS.xlsx")
     df3=pd.read_excel ("book.xlsx")
-    OP=df2.merge(df3, how='left', on='Item ID')
+    OP=df2.merge(df3, how='left', on='ItemID')
     OP["ct"]=OP["NBRUN"]*OP["PRIXUN"]
     OP=OP.fillna(0)
     myList =[]
@@ -159,7 +172,7 @@ def load_data(file,option1,option2,option3,d):
             book.active= book[i]
         
             sheet1=book.active
-            for t in range(len(OP['Item ID'])):
+            for t in range(len(OP['ItemID'])):
                 #print(t)
                 sheet1['E'+str(t+12)].value=OP[i][t]
                 
@@ -170,12 +183,12 @@ def load_data(file,option1,option2,option3,d):
         
         OP["total"]=OP["total"]+OP[i]
     nam=book.sheetnames
-    for t in range(len(OP['Item ID'])):
+    for t in range(len(OP['ItemID'])):
         book.active= book['BON DE PREPARATION']
         sheet1=book.active
         form='=+'
         for y in nam:
-            if y=='BON DE PREPARATION' or y=='Item Name':
+            if y=='BON DE PREPARATION' or y=='ItemNameE':
                 print ('non')
             elif y != nam[-1]:
                 form=form+"'"+y+"'"+"!E"+str(t+12)+"+"
