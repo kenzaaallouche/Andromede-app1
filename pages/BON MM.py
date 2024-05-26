@@ -70,7 +70,7 @@ def grat(file,option1,option2,option3,d):
                 for t in range(len(o['ItemID'])):
                     print(o['ItemID'])
 
-                    sheet1['D'+str(t+53)].value=o[i][t]
+                    sheet1['D'+str(t+62)].value=o[i][t]
 
                 #print(o[i][t])
         nam=book.sheetnames
@@ -82,11 +82,11 @@ def grat(file,option1,option2,option3,d):
                 if y=='BON DE PREPARATION' or y=='ItemNameE':
                     print ('non')
                 elif y != nam[-1]:
-                    form=form+"'"+y+"'"+"!D"+str(t+53)+"+"
+                    form=form+"'"+y+"'"+"!D"+str(t+62)+"+"
                 else:
-                    form=form+"'"+y+"'"+"!D"+str(t+53)
+                    form=form+"'"+y+"'"+"!D"+str(t+62)
                 
-            sheet1['D'+str(t+53)]=Translator(form, origin='D'+str(t+53)).translate_formula('D'+str(t+53))
+            sheet1['D'+str(t+62)]=Translator(form, origin='D'+str(t+62)).translate_formula('D'+str(t+62))
         book.save(option1+'.xlsx') 
 
 
