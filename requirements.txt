@@ -4,4 +4,4 @@ streamlit
 openpyxl
 babel
 plotly
-
+streamlit-aggrid
